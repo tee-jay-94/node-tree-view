@@ -1,0 +1,15 @@
+<ul *ngIf="treeData && isArray(treeData[0].values); else displayDetails">
+    <li *ngFor="let node of treeData">
+        <span *ngIf="node.values != 0"><b>></b></span>
+        <span (click)="toggleChild(node)"> {{ node.name }} </span>
+        <app-tree *ngIf="node.showValue" [treeData]="node.values[0].values"></app-tree>
+    </li>
+</ul>
+
+<ng-template #displayDetails>
+    <ul>
+        <li>
+            Population: {{ convertNumberToWords(treeData) }}
+        </li>
+    </ul>
+</ng-template>
